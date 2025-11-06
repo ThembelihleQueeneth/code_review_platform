@@ -14,5 +14,5 @@ export interface ISubmission {
   created_at: Date;
 }
 
-export type NewSubmission = Omit<ISubmission, 'id' | 'created_at'>
-export type updateSubmission =  Pick<ISubmission, 'status'>
+export type NewSubmission = Omit<ISubmission, 'id' | 'created_at'>;
+export type UpdateSubmission = Pick<ISubmission, 'status'>;
