@@ -1,3 +1,5 @@
+import { RegisterRole as Role } from "./user";
+
 export interface IProject {
   id: number;
   name: string;
@@ -10,5 +12,8 @@ export interface IProjectMember {
   id: number;
   project_id: number;
   user_id: number;
-  role: "reviewer" | "submitter";
+  role: Role;
 }
+
+export type NewProject = Omit<IProject, 'id' | 'created_at'>;
+export type UpdateProject = Pick<IProjectMember, 'role'>;
