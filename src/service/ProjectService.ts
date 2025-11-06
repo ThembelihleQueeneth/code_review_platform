@@ -4,7 +4,7 @@
 //Remove users from projects (/api/projects/:id/members/:userId)
 
 import { query } from "../config/database";
-import {IProject, NewProject } from "../types/project";
+import {IProject, IProjectMember, NewProject } from "../types/project";
 
 //Create Project Functionality
 export const createProject = async (appData: NewProject) : Promise<IProject> => {
@@ -24,8 +24,31 @@ export const getAllProjects = async() : Promise<IProject[] | null> => {
     return rows;
 };
 
-//Assign users to project 
+// Assign user to project
+export const assignUserToProject = async (
+  projectId: number,
+  userId: number,
+  role: string // "reviewer" | "submitter"
+): Promise<IProjectMember> => {
+  const { rows } = await query(
+    "INSERT INTO project_members (project_id, user_id, role) VALUES ($1, $2, $3) RETURNING *",
+    [projectId, userId, role]
+  );
+  return rows[0];
+};
 
 
-//Remove users from project
+// Remove user from project
+export const removeUserFromProject = async (
+  projectId: number,
+  userId: number
+): Promise<IProjectMember | null> => {
+  const { rows } = await query(
+    "DELETE FROM project_members WHERE project_id = $1 AND user_id = $2 RETURNING *",
+    [projectId, userId]
+  );
+
+  return rows[0] || null;
+};
+
 
