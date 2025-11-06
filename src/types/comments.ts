@@ -6,3 +6,5 @@ export interface IComment {
   content: string;
   created_at: Date;
 }
+
+export type NewComment = Omit<IComment, 'id' | 'created_at'>;
