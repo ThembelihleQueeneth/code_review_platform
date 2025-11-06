@@ -16,3 +16,16 @@ export const createProject = async (appData: NewProject) : Promise<IProject> => 
     return rows[0];
 }
 
+//List Projects
+export const getAllProjects = async() : Promise<IProject[] | null> => {
+    const {rows} = await query(
+        "SELECT *FROM projects  ORDER BY created_at DESC "
+    );
+    return rows;
+};
+
+//Assign users to project 
+
+
+//Remove users from project
+
