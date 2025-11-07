@@ -33,6 +33,12 @@ export const findUserById = async (id: number): Promise<IUser | null> => {
   return rows[0] || null;
 };
 
+//Find user by email
+export const findUserByEmail =  async(email:string): Promise<IUser | null> => {
+const { rows } = await query("SELECT * FROM users WHERE email = $1", [email]);
+  return rows[0] || null;
+}
+
 // Update user role by id
 
 export const updateUserRole = async (
