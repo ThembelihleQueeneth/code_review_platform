@@ -29,7 +29,9 @@ export const register = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Error registering the user" });
+    res.status(500).json({ message: "Error registering the user",
+        error: error instanceof Error ? error.message :  error
+     });
   }
 };
 
